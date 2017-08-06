@@ -8,4 +8,4 @@ const mustacheExpress = require('mustache-express');
 // create app instance for Express
 const app = express();
 
-var url = 'mongodb://localhost:27017/robotsdb';
+var url = 'mongodb://localhost:27017/senatorsdb';
