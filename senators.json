@@ -1,5 +1,5 @@
-{ 
- "objects": [
+ 
+ [
   {
    "caucus": null, 
    "congress_numbers": [
@@ -5350,4 +5350,3 @@
    "website": "https://www.strange.senate.gov"
   }
  ]
-}

@@ -1,0 +1,82 @@
+html {
+  background-color: #f0f0f0;
+}
+
+body {
+  color: #999999;
+  font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  padding: 1rem;
+  text-rendering: optimizeLegibility;
+}
+
+ body h1 {
+  color: #000;
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 2.5em;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 30px auto;
+} 
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  color: #696969;
+}
+
+.senator-card {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+  width: 300px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.senator-card h2 {
+  margin: 0;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #7bc19c;
+  font-family: 'Comfortaa', sans-serif;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 1.1rem;
+  text-decoration: none;
+} 
+
+.contact {
+  color: #696969;
+  font-size: 0.8em;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.senator-card .address {
+  margin: 10px auto;
+  font-weight: lighter;
+  text-transform: capitalize;
+} 
+
+ .button {
+  background-color: white;
+  border: 1px solid #cccccc;
+  border-radius: 1rem;
+  color: #696969;
+  padding: 0.5rem;
+  display: block;
+  width: 40%;
+  margin: 20px auto;
+}

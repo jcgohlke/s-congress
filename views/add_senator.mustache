@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Current US Senators</title>
+    <link rel="stylesheet" href="form-styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
+  </head>
+  <body>
+    <div class="wrapper">
+      <form action="/add_senator" method="post">
+        <div class="header">
+          <span class="title">Add a Senator</span>
+        </div>
+        <div class="fields" id="fields">
+          <input type="text" placeholder="Senator's Name" id="senator-name">
+          <input type="text" placeholder="Home State" id="senator-state">
+          <select id="senator-gender">
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+          </select>
+          <input type="date" name="senator-birthdate">
+        </div>
+        <div class="footer">
+          <button>Submit Form</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
