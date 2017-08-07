@@ -9,22 +9,30 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
   </head>
   <body>
+    <div class="navigation">
+      <a class="contact-button" href="/">U.S. Senators</a>
+    </div>
     <div class="wrapper">
       <form action="/add_senator" method="post">
         <div class="header">
           <span class="title">Add a Senator</span>
         </div>
         <div class="fields" id="fields">
-          <input type="text" placeholder="Senator's Name" id="senator-name">
-          <input type="text" placeholder="Home State" id="senator-state">
-          <select id="senator-gender">
+          <input type="text" placeholder="Senator's Name" name="name">
+          <input type="text" placeholder="Home State" name="state">
+          <select name="gender">
             <option value="female">Female</option>
             <option value="male">Male</option>
           </select>
-          <input type="date" name="senator-birthdate">
+          <select name="party">
+            <option value="Democrat">Democrat</option>
+            <option value="Independent">Independent</option>
+            <option value="Republican">Republican</option>
+          </select>
+          <input type="date" name="birthdate" value="1960-01-01">
         </div>
         <div class="footer">
-          <button>Submit Form</button>
+          <button>Save Senator</button>
         </div>
       </form>
     </div>

@@ -1,12 +1,17 @@
 // dependency requirement for libraries
 const express = require('express');
 const mongoClient = require('mongodb').MongoClient;
+const bodyParser = require('body-parser');
 
 // const path = require('path');
 const mustacheExpress = require('mustache-express');
 
 // create app instance for Express
 const app = express();
+
+// Configure Body Parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // run this command at the terminal to import the senator data into Mongo
 // mongoimport --db senatorsdb --collection senators --file senators.json
@@ -24,7 +29,7 @@ app.set('view engine', 'mustache');
 
 var findAllSenators = function(db, callback) {
   var collection = db.collection('senators');
-  collection.find().toArray(function(err, results) {
+  collection.find().sort({ "person.lastname": 1 }).toArray(function(err, results) {
     callback(results);
   });
 }
@@ -54,6 +59,31 @@ app.get('/', function (req, res) {
   });
 });
 
+app.get('/add_senator', function(req, res) {
+  res.render('add_senator');
+});
+
+app.post('/add_senator', function(req, res) {
+  mongoClient.connect(url, function(err, db) {
+    if (err) {
+      console.log('Error connecting to Mongo DB: ' + err);
+    } else {
+      db.collection('senators').insertOne({
+        "party": req.body.party,
+        "state": req.body.state,
+        "person": { "gender": req.body.gender,
+                    "firstname": req.body.name.split(" ")[0],
+                    "lastname": req.body.name.split(" ")[1],
+                    "birthday": req.body.birthdate },
+      });
+      findAllSenators(db, function(results) {
+        res.render('index', { senators: results });
+        db.close();
+      });
+    }
+  });
+});
+
 app.get('/:id', function (req, res) {
   mongoClient.connect(url, function(err, db) {
     if (err) {
@@ -64,15 +94,6 @@ app.get('/:id', function (req, res) {
       });
     }
   })
-});
-
-app.get('/add_senator', function(req, res) {
-  console.log('displaying form');
-  res.render('add_senator');
-});
-
-app.post('/add_senator', function(req, res) {
-
 });
 
 // make app listen on a particular port (starts server)

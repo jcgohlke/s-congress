@@ -31,6 +31,20 @@ body {
   color: #696969;
 }
 
+body h2 {
+  text-align: center;
+  font-size: 1.0rem;
+}
+
+.contact-button {
+  color: #3E8ACC;
+  padding: 0.5rem;
+  display: block;
+  width: 10%;
+  margin: 20px auto;
+  text-align: center;
+}
+
 .senator-card {
   background-color: white;
   border-radius: 0.25rem;
@@ -49,7 +63,7 @@ body {
   margin: 0;
   padding-top: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #7bc19c;
+  border-bottom: 2px solid #3E8ACC;
   font-family: 'Comfortaa', sans-serif;
   text-transform: uppercase;
   font-weight: 300;
@@ -70,13 +84,16 @@ body {
   text-transform: capitalize;
 } 
 
- .button {
-  background-color: white;
-  border: 1px solid #cccccc;
+.button {
+  background-color: #3E8ACC;
   border-radius: 1rem;
-  color: #696969;
   padding: 0.5rem;
   display: block;
   width: 40%;
   margin: 20px auto;
+}
+
+.button a {
+  text-decoration: none;
+  color: white;
 }
