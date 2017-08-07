@@ -12,6 +12,8 @@
     <div class="wrapper">
       <form action="/add_senator" method="post">
         <div class="fields" id="fields">
+          <span>New Record ID: </span>
+          <input type="text" name="id" value="{{newId}}" readonly>
           <input type="text" placeholder="Senator's Name" name="name">
           <input type="text" placeholder="Home State" name="state">
           <select name="gender">

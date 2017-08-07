@@ -34,9 +34,18 @@ var findAllSenators = function(db, callback) {
   });
 };
 
+var findLargestId = function(db, callback) {
+  var collection = db.collection('senators');
+  collection.find().sort({ id:-1 }).toArray(function(err, results) {
+    db.close();
+    callback(parseInt(results[0].id));
+  });
+};
+
 var findSpecificSenator = function(db, id, callback) {
   var collection = db.collection('senators');
   collection.findOne({ "id": id }, function(err, doc) {
+    db.close();
     if (err) {
       console.log('Error fetching specific senator with id: ' + id);
     } else {
@@ -47,12 +56,16 @@ var findSpecificSenator = function(db, id, callback) {
 
 var deleteSpecificSenator = function(db, id, callback) {
   var collection = db.collection('senators');
-  var deleteResult = collection.deleteOne({ "id": id });
-  if (deleteResult.deleteCount == 1) {
-    callback(true);
-  } else {
-    callback(false);
-  }
+  collection.deleteOne({ "id": id }).then(function(result) {
+    db.close();
+    if (result.deletedCount == 1) {
+      callback(true);
+    } else {
+      callback(false);
+    }
+  }).catch(function(error) {
+    console.log('Error deleting record');
+  });
 };
 
 app.get('/', function (req, res) {
@@ -63,14 +76,22 @@ app.get('/', function (req, res) {
     } else {
       findAllSenators(db, function(results) {
         res.render('index', { senators: results });
-        db.close();
       });
     }
   });
 });
 
 app.get('/add_senator', function(req, res) {
-  res.render('add_senator');
+  mongoClient.connect(url, function(err, db) {
+    if (err) {
+      console.log('Error connecting to Mongo DB: ' + err);
+    } else {
+      findLargestId(db, function(id) {
+        res.render('add_senator', {'newId': id+1});
+      });
+    }
+  // res.render('add_senator');
+  });
 });
 
 app.post('/add_senator', function(req, res) {
@@ -79,6 +100,7 @@ app.post('/add_senator', function(req, res) {
       console.log('Error connecting to Mongo DB: ' + err);
     } else {
       db.collection('senators').insertOne({
+        "id": req.body.id,
         "party": req.body.party,
         "state": req.body.state,
         "person": { "gender": req.body.gender,
@@ -88,7 +110,6 @@ app.post('/add_senator', function(req, res) {
       });
       findAllSenators(db, function(results) {
         res.render('index', { senators: results });
-        db.close();
       });
     }
   });
@@ -113,10 +134,10 @@ app.post('/:id', function (req, res) {
     } else {
       deleteSpecificSenator(db, parseInt(req.params.id), function(success) {
         if (success) {
-          findAllSenators(db, function(results) {
-            res.render('index', { senators: results });
-            db.close();
-          });
+          console.log('successful deletion!');
+          res.redirect('/');
+        } else {
+          console.log('Delete unsuccessful');
         }
       })
     }

@@ -194,42 +194,31 @@ li {
   border: 2px solid #C1C1C1;
   box-shadow: 0 1px 4px #C1C1C1;
   width: 675px;
-  margin: 50px auto;
+  margin: 0px auto;
   background-color: white;
-}
-
-.wrapper .header {
-  width: 100%;
-  height: 100px;
-  background-color: #3E8ACC;
-  color: #fff;
-  font-size: 30px;
-  font-family: sans-serif
-}
-
-.wrapper .header .title {
-  display: inline-block;
-  margin-top: 30px;
-  padding-left: 20px
 }
 
 .wrapper .fields {
   padding: 25px;
 }
 
+.fields span {
+  color: black;
+}
+
 .wrapper .fields input {
   padding-left: 15px;
-  width: 500px;
+  width: 90%;
   height: 35px;
   border: 2px solid #CCD1D4;
   border-radius: 3px;
-  margin: 10px;
+   margin: 10px auto; 
   font-size: 15px;
 }
 
 .wrapper .fields select {
-  margin: 10px;
-  width: 520px;
+   margin: 10px auto; 
+  width: 93%;
   height: 35px;
   border: 2px solid #CCD1D4;
   border-radius: 3px;
