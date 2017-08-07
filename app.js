@@ -32,18 +32,28 @@ var findAllSenators = function(db, callback) {
   collection.find().sort({ "person.lastname": 1 }).toArray(function(err, results) {
     callback(results);
   });
-}
+};
 
 var findSpecificSenator = function(db, id, callback) {
   var collection = db.collection('senators');
-  collection.find({ "person.id": id }, function(err, doc) {
+  collection.findOne({ "id": id }, function(err, doc) {
     if (err) {
       console.log('Error fetching specific senator with id: ' + id);
     } else {
       callback(doc);
     }
   });
-}
+};
+
+var deleteSpecificSenator = function(db, id, callback) {
+  var collection = db.collection('senators');
+  var deleteResult = collection.deleteOne({ "id": id });
+  if (deleteResult.deleteCount == 1) {
+    callback(true);
+  } else {
+    callback(false);
+  }
+};
 
 app.get('/', function (req, res) {
   // render a page template called index and pass an object
@@ -89,11 +99,28 @@ app.get('/:id', function (req, res) {
     if (err) {
       console.log('Error connecting to Mongo DB: ' + err);
     } else {
-      findSpecificSenator(db, req.params.id, function(foundSenator) {
+      findSpecificSenator(db, parseInt(req.params.id), function(foundSenator) {
         res.render('specific_senator', { senator: foundSenator });
       });
     }
   })
+});
+
+app.post('/:id', function (req, res) {
+  mongoClient.connect(url, function(err, db) {
+    if (err) {
+      console.log('Error connecting to Mongo DB: ' + err);
+    } else {
+      deleteSpecificSenator(db, parseInt(req.params.id), function(success) {
+        if (success) {
+          findAllSenators(db, function(results) {
+            res.render('index', { senators: results });
+            db.close();
+          });
+        }
+      })
+    }
+  });
 });
 
 // make app listen on a particular port (starts server)

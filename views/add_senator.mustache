@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Current US Senators</title>
-    <link rel="stylesheet" href="form-styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
-  </head>
+  {{> head}}
   <body>
+    <header>
+      <h1>Add a Senator</h1>
+    </header>
     <div class="navigation">
-      <a class="contact-button" href="/">U.S. Senators</a>
+      <a href="/">U.S. Senators</a>
+      <a href="/add_senator">Add Senator</a>
     </div>
     <div class="wrapper">
       <form action="/add_senator" method="post">
-        <div class="header">
-          <span class="title">Add a Senator</span>
-        </div>
         <div class="fields" id="fields">
           <input type="text" placeholder="Senator's Name" name="name">
           <input type="text" placeholder="Home State" name="state">
